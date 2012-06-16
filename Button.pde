@@ -1,6 +1,6 @@
 // one button to rule them all
 //    draws its color, then a brush, then a word...
-class staticButton {
+class StaticButton {
   private int x, y, w, h;
   private color bc;
   private String txt;
@@ -15,7 +15,8 @@ class staticButton {
   private boolean isSVGLoaded;
   private PGraphics svgG;
 
-  staticButton(int x_, int y_, int w_, int h_) {
+  // x,y are absolute values
+  StaticButton(int x_, int y_, int w_, int h_) {
     // set some dimensions
     w = w_;
     h = h_;
@@ -82,8 +83,10 @@ class staticButton {
 
     // draw the image
     if (isSVGLoaded == true) {
-      bpg.copy(svgG, 0, 0, svgG.width, svgG.height, 0, 0, svgG.width, svgG.height);
-      //bpg.blend(svgG, 0, 0, svgG.width, svgG.height, 0, 0, svgG.width, svgG.height,BLEND);
+      // for transparent button
+      //bpg.copy(svgG, 0, 0, svgG.width, svgG.height, 0, 0, svgG.width, svgG.height);
+      // for button with bgnd color
+      bpg.blend(svgG, 0, 0, svgG.width, svgG.height, 0, 0, svgG.width, svgG.height,BLEND);
     }
 
     // draw a word...

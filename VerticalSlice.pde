@@ -1,15 +1,16 @@
 // vertical collection of buttons
-class verticalSlice {
+class VerticalSlice {
   private int x, y, w, h;
 
   private PGraphics spg;
 
   private int numButtons;
-  private ArrayList<staticButton> buttons;
+  private ArrayList<StaticButton> buttons;
 
   boolean needsGen;
 
-  verticalSlice(int x_, int y_, int w_, int h_, int nb) {
+  // x,y are absolute values
+  VerticalSlice(int x_, int y_, int w_, int h_, int nb) {
     x = x_;
     y = y_;
     w = w_;
@@ -23,27 +24,30 @@ class verticalSlice {
     needsGen = false;
   }
 
-  // initializes slice with empty buttons of the right size
+  // initializes slice with blank buttons of the right size
   public void initButtons() {
-    // button x,y-offset
+    // button x,y-offset within slice
     int bxo = 0;
     int byo = 5;
 
     // calc button width and height...
-    int bh = (h-byo*numButtons-byo)/numButtons;
+    //   if more than 12 buttons, make their height 1/numButtons 
+    //   otherwise make them 1/12 of the slice height
+    int bh = (numButtons > 12)?((h-byo*numButtons-byo)/numButtons):((h-byo*12-byo)/12);
     int bw = bh;
 
     // init buttons
-    buttons = (buttons == null)?(new ArrayList<staticButton>()):buttons;
+    buttons = (buttons == null)?(new ArrayList<StaticButton>()):buttons;
     for (int i=0;i<numButtons;i++) {
       // button x,y offset
       int bx = bxo;
       int by = i*(bh+byo);
-      buttons.add(new staticButton(x+bx, y+by, bw, bh));
+      buttons.add(new StaticButton(x+bx, y+by, bw, bh));
     }
 
-    // calc w
+    // re-calc slice w and h
     w = bw+2*bxo;
+    h = (bh+byo)*numButtons;
 
     // init graphic
     spg = createGraphics(w, h, JAVA2D);
@@ -135,7 +139,7 @@ class verticalSlice {
     spg.background(255, 0);
 
     for (int i=0;i<numButtons;i++) {
-      staticButton b = buttons.get(i);
+      StaticButton b = buttons.get(i);
       spg.blend(b.getButtonImg(), 0, 0, b.getW(), b.getH(), b.getX()-x, b.getY()-y, b.getW(), b.getH(), BLEND);
     }
     spg.endDraw();

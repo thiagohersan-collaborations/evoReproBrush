@@ -1,3 +1,7 @@
+////////
+//
+//
+////////
 class diagBrush extends BrushType {
   public void drawHere(int x, int y, int lx, int ly, PGraphics pg, float s, color c) {
     pg.noFill();
@@ -9,6 +13,10 @@ class diagBrush extends BrushType {
   }
 }
 
+////////
+//
+//
+////////
 class lineBrush extends BrushType {
   public void drawHere(int x, int y, int lx, int ly, PGraphics pg, float s, color c) {
     pg.noFill();
@@ -21,7 +29,10 @@ class lineBrush extends BrushType {
   }
 }
 
-
+////////
+//
+//
+////////
 class vertBrush extends BrushType {
   public void drawHere(int x, int y, int lx, int ly, PGraphics pg, float s, color c) {
     pg.noFill();
@@ -34,9 +45,13 @@ class vertBrush extends BrushType {
 }
 
 
+////////
+//
+//
+////////
 class crossBrush extends BrushType {
   crossBrush() {
-    periodUpdate = 60;
+    periodUpdate = 50;
     nextUpdate = millis() + periodUpdate;
   }
 
@@ -92,6 +107,10 @@ class crossBrush extends BrushType {
 }
 
 
+////////
+//
+//
+////////
 class sprayBrush extends BrushType {
   sprayBrush() {
     periodUpdate = 0;
@@ -146,9 +165,13 @@ class sprayBrush extends BrushType {
   }
 }
 
+////////
+//
+//
+////////
 class pointBrush extends BrushType {
   pointBrush() {
-    periodUpdate = 60;
+    periodUpdate = 50;
     nextUpdate = millis() + periodUpdate;
   }
 
@@ -179,7 +202,10 @@ class pointBrush extends BrushType {
   }
 }
 
-/////
+////////
+//
+//
+////////
 class solidBrush extends BrushType {
   solidBrush() {
     periodUpdate = 0;
@@ -222,9 +248,11 @@ class solidBrush extends BrushType {
   }
 }
 
-/////
 
-
+////////
+//
+//
+////////
 abstract class BrushType {
   protected int nextUpdate;
   protected int periodUpdate;

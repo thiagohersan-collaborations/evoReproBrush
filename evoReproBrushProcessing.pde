@@ -18,7 +18,7 @@ final static int COLOR_BRUSH_ALPHA = 128;
 private Canvas c;
 
 void setup() {
-  size(800, 600);
+  size(1024, 800);
   smooth();
   frameRate(60);
 
@@ -48,6 +48,7 @@ void drawRoundRect(int x, int y, int w, int h, int r, color f, PGraphics p) {
   PGraphics tpg;
   tpg = createGraphics(w, h, JAVA2D);
   tpg.beginDraw();
+  tpg.smooth();
   tpg.background(0, 0);
 
   // since the circles and rectangles here overlap

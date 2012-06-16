@@ -1,6 +1,6 @@
 class Menu {
   private int x, y, w, h;
-  private verticalSlice brushS, colorS;
+  private VerticalSlice brushS, colorS;
 
   private boolean needsGen;
   private PGraphics mpg;
@@ -18,6 +18,7 @@ class Menu {
     "menu_brush0.png", "menu_brush1.png", "menu_brush2.png", "menu_brush3.png"
   };
 
+  // x,y are absolute values
   Menu(int x_, int y_, int w_, int h_) {
     w = w_;
     h = h_;
@@ -32,21 +33,23 @@ class Menu {
     int yo = xo;
 
     // init the color slice
-    colorS = new verticalSlice(x+xo, y+yo, 0, h, theColors.length);
+    colorS = new VerticalSlice(x+xo, y+yo, 0, h, theColors.length);
     colorS.initButtons();
     colorS.toggleButton(drawColorInd);
     // set the colors on the buttons of the slice
     colorS.setButtonColor(theColors);
-    colorS.setButtonText("test");
+    //colorS.setButtonText("test");
 
     // init the brushes slice
-    brushS = new verticalSlice((int)(w*0.8), y+yo, 0, h, theBrushes.length);
+    //   there's a HACK here to get the brush slice symmetric to the color slice
+    //   (I'm assuming colorS.getW() is the same as the yet-unset brushS width)
+    brushS = new VerticalSlice((int)(w-colorS.getW()-xo), y+yo, 0, h, theBrushes.length);
     brushS.initButtons();
     brushS.toggleButton(drawBrushInd);
-    // set the colors on the buttons of the slice
-    brushS.setButtonColor(color(255, 255));
-    brushS.setButtonText(theBrushes);
+    // set the image on the buttons of this slice
     brushS.setButtonGraphic(theBrushes);
+    brushS.setButtonColor(color(200));
+    //brushS.setButtonText(theBrushes);
 
     // init graphics
     mpg = createGraphics(w, h, JAVA2D);
